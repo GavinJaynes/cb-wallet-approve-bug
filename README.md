@@ -1,50 +1,72 @@
-# React + TypeScript + Vite
+# ERC20 Token Approval Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple React application demonstrating how to implement ERC20 token approvals on Base network using AppKit and Wagmi.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application provides a user interface for approving ERC20 token spending. It supports multiple tokens including:
 
-## Expanding the ESLint configuration
+- AERO
+- USDC
+- CBBTC
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The demo showcases best practices for implementing token approvals with a 5% buffer to account for potential price fluctuations.
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- Connect wallet using AppKit
+- Select from multiple supported tokens
+- Input custom approval amounts
+- Automatic 5% buffer on approval amounts
+- Real-time transaction status updates
+- Base network integration
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Technical Stack
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- React 18
+- TypeScript
+- Viem/Wagmi for Web3 interactions
+- AppKit for wallet connections
+- TailwindCSS for styling
+- Vite for build tooling
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Key Components
+
+### Token Approval Hook
+
+The `useApproveSpend` hook (see `src/hooks/use-approve-spend.ts`) handles the token approval logic. It:
+
+- Manages approval transaction state
+- Adds a 5% buffer to approval amounts
+- Handles transaction submission and monitoring
+
+### Token Selection
+
+The application supports multiple tokens with their respective:
+
+- Contract addresses
+- Decimal places
+- Token symbols
+- Token icons
+
+## Configuration
+
+The application is configured to work with Base network and uses AppKit for wallet connections. The AppKit configuration can be found in:
+`typescript:src/components/provider-appkit.tsx`
+
+## Development
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
+
+## Security Considerations
+
+- The approval implementation includes a 5% buffer to handle potential price fluctuations
+- All token interactions are performed through verified contract addresses
+- Transaction states are properly handled to prevent double submissions
+
+## License
+
+MIT
