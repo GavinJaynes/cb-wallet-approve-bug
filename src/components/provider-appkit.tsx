@@ -13,10 +13,10 @@ const projectId = "75b1a9ceeae4a1752e3b17b3d61e903f";
 
 // 2. Create a metadata object - optional
 const metadata = {
-  name: "AppKit",
-  description: "AppKit Example",
-  url: "https://example.com", // origin must match your domain & subdomain
-  icons: ["https://avatars.githubusercontent.com/u/179229932"],
+  name: "ERC20 Approval`",
+  description: "Dapp to approve ERC20 tokens",
+  url: "https://approve-erc20.netlify.app",
+  icons: ["https://approve-erc20.netlify.app/images/favicon.svg"],
 };
 
 // 3. Set the networks
@@ -32,7 +32,7 @@ const wagmiAdapter = new WagmiAdapter({
 // 5. Create modal
 createAppKit({
   adapters: [wagmiAdapter],
-  networks,
+  networks: [base],
   projectId,
   metadata,
   features: {
@@ -40,7 +40,7 @@ createAppKit({
   },
 });
 
-export function AppKitProvider({ children }) {
+export function AppKitProvider({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
