@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAccount } from "wagmi";
 import { useApproveSpend } from "./hooks/use-approve-spend";
 
 import type { Address } from "viem";
@@ -25,6 +26,7 @@ export const currencies = [
 ];
 
 function App() {
+  const { address } = useAccount();
   const [amount, setAmount] = useState("");
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
 
@@ -76,6 +78,16 @@ function App() {
           </button>
         </div>
       </div>
+      {address && (
+        <p className="mt-4 text-sm text-white underline">
+          <a
+            href={`https://revoke.cash/address/${address}?chainId=8453`}
+            target="_blank"
+          >
+            Check your approvals here
+          </a>
+        </p>
+      )}
     </div>
   );
 }
